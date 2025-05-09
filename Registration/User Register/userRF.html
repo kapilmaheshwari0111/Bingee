@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-app="registrationApp">
+    <main>
+        <section class="learn">
+           <h1>BINGEE<br>enjoying delicious moments</h1>
+           <p>Discover how food lovers like you become part of our community. <br> Exploring a variety of cuisines and experiencing delightful moments with every bite.</p>  
+        </section>
+        <section>
+            <div class="cta">
+                <p><b>Join Bingee<b> to have a memorable dining experience at home</p>
+            </div>
+            <div class="sign-up" ng-controller="RegistrationController">
+                <form id="signup-form" class="signup-form" ng-submit="submitForm()" name="signupForm" action="thankyou.html">
+                    <div style="display: none;">
+                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" ng-model="formData.firstName" name="first-name" placeholder="First Name" required pattern="^[^0-9]+$">
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm['first-name'].$dirty && signupForm['first-name'].$invalid">
+                        <p class="msg" ng-show="signupForm['first-name'].$dirty && signupForm['first-name'].$invalid">First Name cannot contain numbers</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" ng-model="formData.lastName" name="last-name" placeholder="Last Name" required pattern="^[^0-9]+$">
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm['last-name'].$dirty && signupForm['last-name'].$invalid">
+                        <p class="msg" ng-show="signupForm['last-name'].$dirty && signupForm['last-name'].$invalid">Last Name cannot contain numbers</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="email" ng-model="formData.email" name="email" placeholder="Email Address" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm.email.$dirty && signupForm.email.$invalid">
+                        <p class="msg" ng-show="signupForm.email.$dirty && signupForm.email.$invalid">Invalid email address</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="password" ng-model="formData.password" name="password" placeholder="Password" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm.password.$dirty && signupForm.password.$invalid">
+                        <p class="msg" ng-show="signupForm.password.$dirty && signupForm.password.$invalid">Password cannot be empty</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" ng-model="formData.address" name="address" placeholder="Delivery Address" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm.address.$dirty && signupForm.address.$invalid">
+                        <p class="msg" ng-show="signupForm.address.$dirty && signupForm.address.$invalid">Delivery Address cannot be empty</p>
+                    </div>
+                    <a href="map.html" target="_blank">Use your location as the address</a>
+                    <div class="form-btn">
+                        <input type="tel" ng-model="formData.phone" name="phone" placeholder="Phone Number" required ng-pattern="/^\d{10}$/">
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error" ng-show="signupForm.phone.$dirty && signupForm.phone.$invalid">
+                        <p class="msg" ng-show="signupForm.phone.$dirty && signupForm.phone.$invalid">Phone Number must be 10 digits</p>
+                    </div>
+                    <div data-netlify-recaptcha="true"></div>
+
+                    <!-- Replace Join Now link with a submit button -->
+                    <button type="submit" ng-disabled="signupForm.$invalid">Submit</button>
+                    <p class="terms">By clicking the button, you are agreeing to our <span><a href="#">Terms and Services</a></span></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- Include AngularJS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- AngularJS module and controller -->
+    <script>
+        var app = angular.module('registrationApp', []);
+        app.controller('RegistrationController', function($scope, $http) {
+            $scope.formData = {};
+            $scope.submitForm = function() {
+                if ($scope.signupForm.$valid) {
+                    $http({
+                        method: 'POST',
+                        url: 'submit.php',
+                        data: $.param($scope.formData),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }).then(function(response) {
+                        console.log(response.data);
+                        // No need to redirect here since the form's action attribute will handle it
+                    }, function(error) {
+                        console.log(error);
+                        // Handle error
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+</html>

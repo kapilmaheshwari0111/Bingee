@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="st.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <style>
+        
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-right: 60px;
+        }
+
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-details h3 {
+            margin-top: 0;
+        }
+
+        
+        .search-container {
+          display: flex;
+          justify-content: space-between;
+            background-color: #3B0D11;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .search-container label{
+            color: white;
+        }
+
+        
+        .wrap { background-color: #3B0D11; }
+        .beverage  { background-color: #3B0D11; }
+       
+    </style>
+</head>
+
+<body ng-app="myApp">
+   
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home-final.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about-us.html"><i class="fas fa-info"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="photo-gallery.html"><i class="fas fa-images"></i> Photo Gallery</a></li>
+                    <li><a href="registration-form.html"><i class="fas fa-user-plus"></i> Registration Form</a></li>
+                    <li><a href="heroes-and-modals.html"><i class="fas fa-star"></i> Heroes and Modals</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    
+    <h1>Food Menu</h1>
+
+   
+    <div ng-controller="foodMenuCtrl">
+        <!-- Search container -->
+        <div class="search-container">
+            <!-- Filter by Category -->
+            <label>Filter by Category:</label>
+            <select ng-model="categoryFilter">
+                <option value="">All</option>
+                <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+            </select>
+
+            <!-- Filter by Price Range -->
+            <label>Filter by Price Range:</label>
+            <input type="number" ng-model="minPrice" placeholder="Min Price">
+            <input type="number" ng-model="maxPrice" placeholder="Max Price">
+
+            <!-- Filter by Keyword -->
+            <label>Search by Keyword:</label>
+            <input type="text" ng-model="keywordFilter" placeholder="Enter keyword">
+        </div>
+
+        <ul>
+          
+            <li ng-repeat="foodItem in foodMenu | filter : { category: categoryFilter } | filter : priceRangeFilter | filter : keywordFilter | orderBy : 'name' | limitTo : 6"
+                class="food-item" ng-class="foodItem.category.toLowerCase()">
+                <img ng-src="{{ foodItem.image }}" alt="{{ foodItem.name }}">
+                <div class="food-details">
+                    <h3>{{ foodItem.name | uppercase }}</h3>
+                    <p>Category: {{ foodItem.category | lowercase }}</p>
+                    <p>Price: {{ foodItem.price | number | currency : "₹" }}</p>
+                    <p>Description: {{ foodItem.description }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('myApp', []).controller('foodMenuCtrl', function($scope, $filter) {
+            
+           $scope.foodMenu = [
+            {
+              "name": "Veggie Wrap",
+              "category": "Wrap",
+              "price": 150,
+              "description": "A delicious wrap filled with assorted veggies and sauces.",
+              "image": "https://example.com/veggie-wrap.jpg"
+            },
+            {
+              "name": "Chicken Wrap",
+              "category": "Wrap",
+              "price": 180,
+              "description": "Tender chicken pieces wrapped in a soft tortilla with fresh veggies and mayo.",
+              "image": "https://example.com/chicken-wrap.jpg"
+            },
+            {
+              "name": "Paneer Tikka Wrap",
+              "category": "Wrap",
+              "price": 200,
+              "description": "A flavorful wrap stuffed with marinated paneer tikka pieces and veggies.",
+              "image": "https://example.com/paneer-tikka-wrap.jpg"
+            },
+            {
+              "name": "Iced Coffee",
+              "category": "Beverage",
+              "price": 120,
+              "description": "Chilled coffee served with ice cubes and milk, perfect for a hot day.",
+              "image": "https://example.com/iced-coffee.jpg"
+            },
+            {
+              "name": "Fresh Lemonade",
+              "category": "Beverage",
+              "price": 100,
+              "description": "Refreshing lemonade made with freshly squeezed lemons and sugar.",
+              "image": "https://example.com/fresh-lemonade.jpg"
+            },
+            {
+              "name": "Mango Smoothie",
+              "category": "Beverage",
+              "price": 150,
+              "description": "Creamy mango smoothie made with ripe mangoes and yogurt.",
+              "image": "https://example.com/mango-smoothie.jpg"
+            }
+          ];
+
+            
+            $scope.categories = [];
+            angular.forEach($scope.foodMenu, function(item) {
+                if ($scope.categories.indexOf(item.category) === -1) {
+                    $scope.categories.push(item.category);
+                }
+            });
+
+            
+            $scope.priceRangeFilter = function(foodItem) {
+                if (($scope.minPrice && foodItem.price < $scope.minPrice) ||
+                    ($scope.maxPrice && foodItem.price > $scope.maxPrice)) {
+                    return false;
+                }
+                return true;
+            };
+        });
+    </script>
+</body>
+
+</html>

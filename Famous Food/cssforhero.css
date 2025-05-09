@@ -1,0 +1,352 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  overflow-x: hidden;
+}
+
+header {
+  background-color: #373a31;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+}
+
+header h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: xx-large;
+}
+
+section {
+  padding: 20px;
+  text-align: center;
+}
+
+section h2 {
+  font-weight: bold;
+}
+.goback-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #2b2e25; /* Button background color */
+  color: #fff; /* Button text color */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 4; /* Ensure the button is above other elements */
+  transition: color 0.35s ease-in-out;
+}
+.goback-button:hover{
+  color: aquamarine;
+}
+
+
+div img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.pasta,
+.pizza,
+.bchicken,
+.naan {
+  position: relative;
+  width: 10vw;
+  margin: 20px auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pasta {
+  margin-left: -18vw;
+  width: 28vw;
+  transition: margin-left 0.3s ease;
+}
+
+.pasta:hover {
+  margin-left: 1vw;
+}
+.shapep {
+  position: absolute;
+  margin-top: -1vw;
+  left: -10vw;
+  width: 10vw; /* Set an initial width */
+  height: 30vw;
+  background-color: #3b0d11;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%, 0% 50%);
+  border-radius: 0 50vw 50vw 0;
+  z-index: -2;
+  opacity: 0;
+  transition: width 0.5s, opacity 0.3s;
+}
+.food-pasta:hover .shapep {
+  width: 85vw;
+  opacity: 1;
+}
+
+.food-pasta .caption {
+  position: absolute;
+  margin-top: -16vw;
+  left: 1vw;
+  font-size: 1.3vw;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #bbb5bd;
+  z-index: -1;
+  transition: left 0.5s, opacity 0.3s;
+}
+.food-pasta:hover .caption {
+  left: 50vw;
+  opacity: 1;
+}
+
+.pizza {
+  margin-right: -14vw;
+  width: 27vw;
+  overflow: hidden;
+  transition: margin-right 0.4s ease;
+}
+
+.pizza:hover {
+  margin-right: 0.5vw;
+}
+
+.food-pizza .caption {
+  position: absolute;
+  margin-top: -15vw;
+  left: 100vw;
+  opacity: 0;
+  font-size: 1vw;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  color: #bbb5bd;
+  transition: left 0.5s, opacity 0.5s;
+}
+.food-pizza:hover .caption {
+  left: 52vw;
+  opacity: 1;
+}
+
+.shapepizza {
+  position: absolute;
+  margin-top: -10px;
+  right: 0px;
+  margin-left: 100px;
+  width: 1vw; /* Set an initial width */
+  height: 26.9vw;
+  background-color: #3b0d11;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%, 0% 50%);
+  border-radius: 50vw 0px 0 50vw;
+  z-index: -2;
+  opacity: 0;
+  transition: width 0.5s, opacity 0.3s;
+}
+.food-pizza:hover .shapepizza {
+  width: 70vw;
+  opacity: 1;
+}
+
+.bchicken {
+  margin-left: -19vw;
+  width: 35vw;
+  transition: margin-left 0.3s ease;
+}
+.bchicken:hover {
+  margin-left: -2.6vw;
+}
+
+.shapebc {
+  position: absolute;
+  margin-top: 20px;
+  left: -10vw;
+  width: 10vw; /* Set an initial width */
+  height: 26vw;
+  background-color: #3b0d11;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%, 0% 50%);
+  border-radius: 0 250px 250px 0;
+  z-index: -2;
+  opacity: 0;
+  transition: width 0.5s, opacity 0.3s;
+}
+.food-bc:hover .shapebc {
+  width: 80vw;
+  opacity: 1;
+}
+
+.food-bc .caption {
+  position: absolute;
+  margin-top: -16vw;
+  left: -1vw;
+  opacity: 0;
+  font-size: 0.9vw;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  color: #bbb5bd;
+  transition: left 0.5s, opacity 0.3s;
+}
+.food-bc:hover .caption {
+  left: 48vw;
+  opacity: 1;
+}
+
+.naan {
+  margin-right: -13.5vw;
+  width: 25vw;
+  transition: margin-right 0.3s ease;
+}
+
+.naan:hover {
+  margin-right: 1vw;
+}
+
+.shapenn {
+  position: absolute;
+  margin-top: 0.25vw;
+  right: 0vw;
+  margin-left: 100px;
+  width: 1vw; /* Set an initial width */
+  height: 24.5vw;
+  background-color: #3b0d11;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%, 0% 50%);
+  border-radius: 250px 0px 0 250px;
+  z-index: -2;
+  opacity: 0;
+  transition: width 0.5s, opacity 0.3s;
+}
+.food-naan:hover .shapenn {
+  width: 70vw;
+  opacity: 1;
+}
+
+.food-naan .caption {
+  position: absolute;
+  margin-top: -15vw;
+  left: 100vw;
+  font-size: 1vw;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  color: #bbb5bd;
+  transition: left 0.5s, opacity 0.5s;
+}
+.food-naan:hover .caption {
+  left: 53vw;
+  opacity: 1;
+}
+footer {
+  background-color: #373a31;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin: 10px 0;
+}
+/* Set up background image */
+.bgfimages {
+  position: relative;
+}
+
+.bgfimages::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("wood_texture_2901.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2; /* Ensure the background stays behind other content */
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1; /* Ensure content is above the background */
+}
+
+/* Style the section containing popular dishes */
+section {
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly transparent white background */
+}
+.separator {
+  border-top: 0.2vw solid #3b0d11; /* Adjust color and size as needed */
+  margin: -2px 0; /* Add margin for spacing */
+}
+.separator.bin {
+  margin: 0px;
+}
+
+.separator.video {
+  margin: 0px;
+  display: none;
+}
+
+.videos {
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f8f8; /* Adjust background color as needed */
+}
+
+.video-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.video-link {
+  width: 48%; /* Adjust the width as needed */
+  height: 500px; /* Adjust the height as needed */
+  margin-bottom: 20px; /* Add spacing between videos */
+  text-decoration: none;
+  color: #333;
+}
+
+.video-link iframe {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #3498db; /* Border color for the iframe */
+}
+.videobg {
+  background-image: url("photo-1556911220-bff31c812dba.jpg"); /* Replace with your background image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 0; /* Adjust padding as needed */
+}
+
+.video-content {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+.pizzasvg > svg{
+  position: relative;
+  width: 150px;
+  height: auto;
+}

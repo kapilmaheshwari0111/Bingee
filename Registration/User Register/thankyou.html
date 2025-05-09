@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .stars {
+            display: flex;
+            justify-content: center;
+        }
+
+        .fa-star {
+            font-size: 24px; /* Adjust size as needed */
+            margin: 0 5px; /* Adjust spacing between stars */
+            transition: transform 0.2s, color 0.2s; /* Add transition for hover effect on color */
+            cursor: pointer;
+            color: #ccc; /* Default star color */
+        }
+
+        .fa-star:hover {
+            color: yellow; /* Yellow color on hover */
+            transform: scale(1.2); /* Add scale effect on hover */
+        }
+
+        .fa-star.checked {
+            color: yellow; /* Yellow color for checked stars */
+        }
+
+        #feedback-textbox {
+            display: none; /* Initially hide the text box */
+            margin-top: 10px; /* Adjust spacing */
+            width: 100%; /* Make the text box full width */
+        }
+
+        /* Hide only the .cta contents */
+        .hidden .cta {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="sign-up">
+                <h1>Thank You for Registering</h1>
+                <div class="stars" id="star-rating" data-rating="0">
+                    <span class="fa fa-star" data-rating="1"></span>
+                    <span class="fa fa-star" data-rating="2"></span>
+                    <span class="fa fa-star" data-rating="3"></span>
+                    <span class="fa fa-star" data-rating="4"></span>
+                    <span class="fa fa-star" data-rating="5"></span>
+                </div>
+                <div class="cta">
+                    <p>Would you like to rate us?</p>
+                    <button id="rate-now-btn" class="form-btn">Rate Now</button>
+                    <button id="rate-later-btn" class="form-btn">Rate Later</button>
+                    <!-- Textbox for feedback -->
+                    <textarea id="feedback-textbox" placeholder="Your feedback (max 150 characters)" maxlength="150"></textarea>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('rate-now-btn').addEventListener('click', function() {
+            // Show the rating options or redirect to the rating page
+            // You can implement this functionality as needed
+            console.log('User clicked on Rate Now button');
+            var rating = document.getElementById('star-rating').getAttribute('data-rating');
+            console.log('User selected rating:', rating);
+            // Show the feedback textbox
+            document.getElementById('feedback-textbox').style.display = 'block';
+            // Now you can send this rating to your server or handle it accordingly
+        });
+
+        document.getElementById('rate-later-btn').addEventListener('click', function() {
+            // Hide only the .cta contents
+            document.querySelector('.sign-up').classList.add('hidden');
+            console.log('User clicked on Rate Later button');
+        });
+
+        // Event listener for star clicks
+        document.querySelectorAll('.fa-star').forEach(function(star) {
+            star.addEventListener('click', function() {
+                var rating = parseInt(star.getAttribute('data-rating'));
+                document.getElementById('star-rating').setAttribute('data-rating', rating);
+                // Toggle checked class for styling
+                document.querySelectorAll('.fa-star').forEach(function(s) {
+                    if (parseInt(s.getAttribute('data-rating')) <= rating) {
+                        s.classList.add('checked');
+                    } else {
+                        s.classList.remove('checked');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

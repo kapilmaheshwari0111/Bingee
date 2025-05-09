@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Promotions</title>
+    <link rel="icon" type="image/x-icon" href="logomain.png" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="C:\Users\premg\OneDrive\Desktop\KAJAL\full stack\image_2024-01-12_202359685-transformed (1).jpg" type="Icon (.ico)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            background-image: url('food.jpg');
+        }
+
+        .container {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-custom-color {
+      background-color: #3b0d11;
+    }
+
+    nav a{
+      text-decoration: none;
+    }
+    .nav-item .nav-link {
+    position: relative;
+  }
+
+  .nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+  .nav-item:hover .nav-link::after {
+    width: 100%;
+  }
+
+        .promotion-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .promotion-box:hover {
+            transform: scale(1.1);
+        }
+
+        .promotion-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .promotion-details {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto; 
+        }
+
+        .promotion-box:hover .promotion-details {
+            display: block;
+        }
+
+        .promotion-details h5 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .promotion-details p {
+            margin-top: 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <section class="header">
+        <nav class="navbar navbar-expand-lg bg-custom-color" aria-label="Eleventh navbar example">
+            <div class="container-fluid px-5 py-2">
+              <div>
+                <img src="logomain.png" alt="logo" width="50px" />
+                <a class="navbar-brand text-white" href="D:\fullstack\Fsd\New\Home\home-final.html"
+                  style="font-family: sans-serif; font-weight: bolder">BINGEE</a>
+              </div>
+              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+              <div class="navbar-collapse collapse" id="navbarsExample09" style="margin-left: 27%;">
+                <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+                  <li class="nav-item" style="margin-right: 25px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-house"
+                        viewBox="0 0 16 16">
+                        <path
+                          d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                      </svg>
+                      <a class="nav-link active text-white" aria-current="page" href="D:\fullstack\Fsd\New\Home\home-final.html">Home</a>
+                    </div>
+                  </li>
+                  <li class="nav-item" style="margin-right: 25px;">
+                    <div style="display: flex; align-items: center;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                      </svg>
+                    <a class="nav-link active text-white" aria-disabled="true" href="D:\fullstack\Fsd\New\Registration\registration1.html">Register</a>
+                      </div>
+                  </li>
+                  <li class="nav-item dropdown" style="margin-right: 25px;">
+                      <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"
+                      aria-expanded="false">Food</a>
+                    
+                      <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\Food Gallery\Gallery.html">Food Gallery</a></li>
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\Restaurant\order1.html">Restaurants</a></li>
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\Promotions\Promotions.html">Promotions</a></li>
+                      <li>
+                        <a class="dropdown-item" href="D:\fullstack\Fsd\New\Famous Food\food.html">Popular Dishes</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown" style="margin-right: 25px;">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"
+                      aria-expanded="false">Review</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\User Review\review.html">User Reviews</a></li>
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\Awards\awardsandrecognition.html">Awards</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown" style="margin-right: 25px;">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"
+                      aria-expanded="false">Support</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\Contact\contact.html">Contact Us</a></li>
+                      <li><a class="dropdown-item" href="D:\fullstack\Fsd\New\About-us\About-Bingee.html">About Us</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+</section>
+    <div class="container">
+        <h1 class="text-center mb-4">Restaurant Promotions</h1>
+
+        <div id="promotionContainer">
+            <div class="row">
+                <div class="col-12 d-flex flex-wrap justify-content-center">
+    <div class="promotion-box">
+        <img src="flat.jpeg" alt="Promotion 1 Image">
+        <div class="promotion-details">
+            <h5>Flat ₹100 Off on First Order</h5>
+            <p>Get ₹100 off on your first order. Use code FIRST100 at checkout <br> Applicable Items: All items <br> Minimum Order: ₹300</p>
+        </div>
+    </div>
+    <div class="promotion-box">
+        <img src="free.png" alt="Promotion 2 Image">
+        <div class="promotion-details">
+            <h5>Free Delivery on Orders Over ₹500</h5>
+            <p>No promo code required. Enjoy free delivery on orders over ₹500. Limited time offer. <br> Applicable Items: All items <br> Payment Method: Any</p>
+        </div>
+    </div>
+        <div class="promotion-box">
+        <img src="10pc.png" alt="Promotion 3 Image">
+        <div class="promotion-details">
+            <h5>Student Special: 10% Off</h5>
+            <p>Students get 10% off on their orders. Show your student ID to avail the offer! <br> Applicable Items: All items <br> Valid Student ID Required</p>
+        </div>
+    </div>
+    <div class="promotion-box">
+        <img src="senior.png" alt="Promotion 4 Image">
+        <div class="promotion-details">
+            <h5>Senior Citizen Discount: 15% Off</h5>
+            <p>Senior citizens enjoy 15% off on their orders <br> Age proof required. <br> Applicable Items: All items <br> Age Proof Required (60+)</p>
+        </div>
+    </div>
+<div class="promotion-box">
+    <img src="weekend.jpg" alt="Promotion 5 Image">
+    <div class="promotion-details">
+        <h5>Weeknight Dinner Special: Flat ₹150 Off</h5>
+        <p>Enjoy flat ₹150 off on weeknight dinner orders. Perfect for a weekday treat! <br> Applicable Items: Dinner menu <br> Valid Monday to Thursday after 6:00 PM</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="loyalty.jpg" alt="Promotion 6 Image">
+    <div class="promotion-details">
+        <h5>Loyalty Program: Earn Points with Every Purchase</h5>
+        <p>Join our loyalty program and earn points with every purchase. Redeem points for discounts! <br> Applicable Items: All items <br> Joining Fee: ₹350</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="takeaway.jpg" alt="Promotion 7 Image">
+    <div class="promotion-details">
+        <h5>Takeaway Special: 15% Off</h5>
+        <p>Order takeaway and get 15% off on your bill. No minimum order required. <br> Applicable Items: All items <br> Valid for Takeaway Orders Only</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="200rs.jpg" alt="Promotion 8 Image">
+    <div class="promotion-details">
+        <h5>Family Combo Offer: ₹200 Off</h5>
+        <p>Get ₹200 off on family combo orders. Perfect for group meals! <br> Applicable Items: Combo meals only <br> Minimum Order: ₹800</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="b1g1.jpg" alt="Promotion 9 Image">
+    <div class="promotion-details">
+        <h5>Happy Hour Special: Buy 1 Get 1 Free</h5>
+        <p>Enjoy buy 1 get 1 free offer during happy hours. Limited time offer! <br> Applicable Items: Drinks and appetizers <br> Happy Hour Timing: 4:00 PM - 6:00 PM</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="20pc.jpg" alt="Promotion 10 Image">
+    <div class="promotion-details">
+        <h5>Weekend Brunch Buffet: 20% Off</h5>
+        <p>Get 20% off on weekend brunch buffet. Treat yourself to a delightful meal! <br> Applicable Items: Brunch buffet <br> Validity: Saturdays and Sundays only</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="order online.jpg" alt="Promotion 11 Image">
+    <div class="promotion-details">
+        <h5>Online Order Exclusive: ₹50 Off</h5>
+        <p>Order online and get ₹50 off on your total bill. Use code ONLINE50 at checkout <br> Applicable Items: All items <br> Minimum Order: ₹300</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="birthday.png" alt="Promotion 12 Image">
+    <div class="promotion-details">
+        <h5>Birthday Special: 15% Off</h5>
+        <p>Celebrate your birthday with us and enjoy 15% off on your bill! <br> Applicable Items: All items <br> Proof Required: ID with birthdate</p>
+    </div>
+</div>
+<div class="promotion-box">
+    <img src="hdfc.png" alt="Promotion 13 Image">
+    <div class="promotion-details">
+        <h5>10% Cashback with HDFC Bank Cards</h5>
+        <p>Pay with HDFC Bank cards and get 10% cashback. Maximum cashback ₹200. <br> Applicable Items: All items <br> Minimum Order: ₹1000</p>
+    </div>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+    <
+    <script>
+    var promotions = [
+        { title: "Flat ₹100 Off on First Order", description: "Get ₹100 off on your first order. Use code FIRST100 at checkout <br> Applicable Items: All items <br> Minimum Order: ₹300" },
+        { title: "Free Delivery on Orders Over ₹500", description: "No promo code required. Enjoy free delivery on orders over ₹500. Limited time offer. <br> Applicable Items: All items <br> Payment Method: Any" },
+        { title: "Student Special: 10% Off", description: "Students get 10% off on their orders. Show your student ID to avail the offer! <br> Applicable Items: All items <br> Valid Student ID Required" },
+        { title: "Senior Citizen Discount: 15% Off", description: "Senior citizens enjoy 15% off on their orders <br> Age proof required. <br> Applicable Items: All items <br> Age Proof Required (60+)" },
+        { title: "Weeknight Dinner Special: Flat ₹150 Off", description: "Enjoy flat ₹150 off on weeknight dinner orders. Perfect for a weekday treat! <br> Applicable Items: Dinner menu <br> Valid Monday to Thursday after 6:00 PM" },
+        { title: "Loyalty Program: Earn Points with Every Purchase", description: "Join our loyalty program and earn points with every purchase. Redeem points for discounts! <br> Applicable Items: All items <br> Joining Fee: ₹350" },
+        { title: "Takeaway Special: ₹50 Off", description: "Order takeaway and get ₹50 off on your bill. No minimum order required. <br> Applicable Items: All items <br> Valid for Takeaway Orders Only" },
+        { title: "Family Combo Offer: ₹200 Off", description: "Get ₹200 off on family combo orders. Perfect for group meals! <br> Applicable Items: Combo meals only <br> Minimum Order: ₹800" },
+        { title: "Happy Hour Special: Buy 1 Get 1 Free", description: "Enjoy buy 1 get 1 free offer during happy hours. Limited time offer! <br> Applicable Items: Drinks and appetizers <br> Happy Hour Timing: 4:00 PM - 6:00 PM" },
+        { title: "Weekend Brunch Buffet: 20% Off", description: "Get 20% off on weekend brunch buffet. Treat yourself to a delightful meal! <br> Applicable Items: Brunch buffet <br> Validity: Saturdays and Sundays only" },
+        { title: "Online Order Exclusive: ₹50 Off", description: "Order online and get ₹50 off on your total bill. Use code ONLINE50 at checkout <br> Applicable Items: All items <br> Minimum Order: ₹300" },
+        { title: "Birthday Special: 15% Off", description: "Celebrate your birthday with us and enjoy 15% off on your bill! <br> Applicable Items: All items <br> Proof Required: ID with birthdate" },
+        { title: "10% Cashback with HDFC Bank Cards", description: "Pay with HDFC Bank cards and get 10% cashback. Maximum cashback ₹200. <br> Applicable Items: All items <br> Minimum Order: ₹1000" }
+
+    ];
+
+    
+    var currentIndex = 0;
+
+    
+    function updatePromotionDetails(index) {
+        var promotion = promotions[index];
+        document.getElementById("promotionTitle").textContent = promotion.title;
+        document.getElementById("promotionDescription").textContent = promotion.description;
+    }
+
+    
+    function handleHover(index) {
+        return function () {
+            currentIndex = index;
+            updatePromotionDetails(index);
+        };
+    }
+
+    
+    document.querySelectorAll('.promotion-box').forEach(function (box, index) {
+        box.addEventListener('mouseover', handleHover(index));
+    });
+
+    
+    updatePromotionDetails(currentIndex);
+</script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

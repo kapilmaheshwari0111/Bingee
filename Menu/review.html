@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="st.css">
+<title>Food Delivery Website - Reviews</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #3B0D11;
+  }
+  
+  h1 {
+    color: Black;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .customer-reviews {
+    position: relative;
+    top: 250px; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    background-color: transparent;
+    z-index: 100; 
+  }
+  
+  .review {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px; 
+    padding: 10px; 
+    background-color: white; 
+    border-radius: 10px;
+    width: 200px; 
+    height: 300px; 
+    transition: all 0.3s ease; 
+  }
+
+  .review:hover {
+    transform: scale(1.05); 
+  }
+
+  .review img {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: all 0.3s ease; 
+  }
+  
+  .review:hover img {
+    transform: scale(1.1); 
+  }
+  
+  .review-content {
+    text-align: center;
+  }
+  
+  .review-content h2 {
+    margin-top: 0;
+    color: #555;
+    font-size: 1.2em; 
+  }
+  
+  .review-content p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .stars {
+    color: #FFD700;
+    font-size: 1.5em;
+  }
+
+  
+  #background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .header {
+            position: relative;
+            max-width: 100%;
+            min-height: 100vh;
+            background-size: 100% 100vh;
+            background-position: center center;
+            background-repeat: no-repeat;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        nav {
+            background-color: #3B0D11;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            text-align: center;
+        }
+
+        .nav-links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links ul li {
+            display: inline-block;
+            padding: 10px 12px;
+
+        }
+
+        .nav-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links ul li::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: #f44336;
+            text-decoration: none;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+
+        .nav-logo {
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: black;
+        }
+  
+form {
+    position: relative;
+    width: 80%; 
+    margin: 0 auto; 
+    height: auto; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    margin-top: 400px; 
+  }
+        
+        form:hover {
+    box-shadow: 0px 4px 20px rgba(255, 255, 0, 0.5);
+}
+
+        label {
+    display: block;
+    margin-bottom: 8px;
+    color: black;
+}
+        
+     input[type="text"],
+input[type="email"], 
+textarea,
+input[type="submit"],
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="radio"] {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+</style>
+
+</head>
+<body>
+
+
+<canvas id="background-canvas"></canvas>
+
+<nav>
+   <div class="nav-links">
+      <ul>
+         <li><a href="home-final.html"><i class="fas fa-home"></i> Home</a></li>
+         <li><a href="about-us.html"><i class="fas fa-info"></i> About Us</a></li>
+         <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+         <li><a href="photo-gallery.html"><i class="fas fa-images"></i> Photo Gallery</a></li>
+         <li><a href="registration-form.html"><i class="fas fa-user-plus"></i> Registration Form</a></li>
+         <li><a href="order1.html"><i class="fas fa-star"></i> Order</a></li>
+      </ul>
+   </div>
+</nav>
+
+
+<div class="customer-reviews">
+
+  <div class="review">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPGlBSo_xjjwMyhLyH3xU4xjWSiT0ioru2hg&usqp=CAU" alt="User 2">
+    <div class="review-content">
+      <h2>Great Service and Delicious Food!</h2>
+      <p>Ordered the special pizza and it was delivered piping hot! The crust was perfectly crispy, and the toppings were fresh and flavorful. Will definitely order again!</p>
+      <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</p>
+    </div>
+  </div>
+
+  <div class="review">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwlDIt_aeocfuaOqGxdIw9omdk7QMuELR1mg&usqp=CAU" alt="User 3">
+    <div class="review-content">
+      <h2>Fast Delivery</h2>
+      <p>Ordered Chinese takeout and it arrived faster than expected! The food was still hot, and the portions were generous. Impressed with the speed and quality!</p>
+      <p class="stars">&#9733;&#9733;&#9733;&#9733; (4/5)</p>
+    </div>
+  </div>
+
+  <div class="review">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuDFSSHlx-K_FMGkvF-yvenFo5gh7Pbrsz6gfxXNfrrvfejLeO48J2Il0HksUwkrdlJ_g&usqp=CAU" alt="User 4">
+    <div class="review-content">
+      <h2>Impressive Variety of Options</h2>
+      <p>From sushi to burgers, this app has it all! The extensive menu offers something for everyone. Tried the new pasta dish, and it exceeded my expectations!</p>
+      <p class="stars">&#9733;&#9733;&#9733;&#9734;&#9734; (3.5/5)</p>
+    </div>
+  </div>
+
+  <div class="review">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzYYF5V__B5h7sJgGzQf3l-DiA1q383Mbbtw&usqp=CAU" alt="User 5">
+    <div class="review-content">
+      <h2>Excellent Customer Service</h2>
+      <p>Had an issue with my order, but customer service was quick to resolve it! They were polite and helpful, ensuring I had a positive experience. Highly recommend!</p>
+      <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</p>
+    </div>
+  </div>
+
+  <div class="review">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6lTzkH0g_sVi_D-6lGP7toJ3KtgrPNkqvMg&usqp=CAU" alt="User 6">
+    <div class="review-content">
+      <h2>Amazing Food Quality!</h2>
+      <p>Tried the grilled chicken salad and it was amazing! The ingredients were fresh and crisp, and the dressing was flavorful without being overpowering. Definitely a must-try!</p>
+      <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9734; (4.5/5)</p>
+    </div>
+  </div>
+</div>  
+
+<form id="reviewForm" onsubmit="submitForm()">
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" required pattern="[A-Za-z]+">
+
+
+
+
+    <label for="contact">Contact:</label>
+    <input type="text" id="contact" name="contact" required pattern="[0-9]{10}" title="please 10 digits">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label>Rating:</label><br>
+    <input type="radio" name="rating" value="1">1
+    <input type="radio" name="rating" value="2">2
+    <input type="radio" name="rating" value="3">3
+    <input type="radio" name="rating" value="4">4
+    <input type="radio" name="rating" value="5">5<br><br><br>
+    
+    <label for="something">Aspects:</label><br>
+    <input type="checkbox" name="C1" value="qua">Quality
+    <input type="checkbox" name="C2" value="price">Price
+    <input type="checkbox" name="C3" value="cs">Customer Service<br><br><br>
+    
+    <label for="city">City:</label>
+    <select id="city" name="city">
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Chennai">Chennai</option>
+<option value="Kolkata">Kolkata</option>
+<option value="Pune">Pune</option>
+<option value="Jaipur">Jaipur</option>
+<option value="Ahmedabad">Ahmedabad</option>
+<option value="Lucknow">Lucknow</option>
+</select><label for="review">Your Review:</label>
+<textarea id="review" name="review" rows="4" placeholder="Write your review here..." required></textarea>
+
+<input type="submit" value="Submit">
+
+</form>
+<script>
+  
+var canvas = document.getElementById('background-canvas');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var ctx = canvas.getContext('2d');
+
+
+var colors = ['white', '#3B0D11', '#3B0D11'];
+var numWaves = 5;
+var waveWidth = 0.02;
+var waveHeight = 20;
+var xOffset = 20;
+var yOffset = 170;
+
+for (var j = 0; j < colors.length; j++) {
+  ctx.fillStyle = colors[j];
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height);
+  for (var i = 0; i < canvas.width; i++) {
+    ctx.lineTo(i, waveHeight * Math.sin(i * waveWidth + xOffset) + yOffset * j);
+  }
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.fill();
+}
+
+ function submitForm() {
+            alert("Form submitted successfully!");
+        }
+
+</script>
+</body>
+</html>
+

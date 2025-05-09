@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link href="Ordercss.css" rel="stylesheet" />
+    <style>
+      nav {
+        background-color: #3b0d11;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+      }
+
+      .nav-links {
+        text-align: center;
+      }
+
+      .nav-links ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-links ul li {
+        display: inline-block;
+        padding: 10px 12px;
+      }
+
+      .nav-links ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .nav-links ul li::after {
+        content: "";
+        width: 0;
+        height: 2px;
+        background: #f44336;
+        text-decoration: none;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+      }
+
+      .nav-links ul li:hover::after {
+        width: 100%;
+      }
+
+      .nav-logo {
+        margin-right: 20px;
+      }
+
+      nav a {
+        color: white;
+        padding: 14px 16px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      nav a:hover {
+        color: black;
+      }
+      footer a {
+        transition: all 0.5s;
+      }
+      footer a:hover {
+        color: rgba(55, 85, 238, 0.75) !important;
+        text-decoration: underline;
+      }
+      .container a {
+        text-decoration: none;
+        transition: transform 0.2s; /* Adding transition for smooth scaling */
+      }
+
+      .container a:hover {
+        transform: scale(1.1); /* Increases size by 10% */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <nav>
+        <div class="nav-links">
+          <ul>
+            <li>
+              <a href="/home-final.html"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li>
+              <a href="/About-us/About-Bingee.html"><i class="fas fa-info"></i> About Us</a>
+            </li>
+            <li>
+              <a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+            <li>
+              <a href="/photo-gallery.html"><i class="fas fa-images"></i> Photo Gallery</a>
+            </li>
+            <li>
+              <a href="/registration.html"><i class="fas fa-user-plus"></i> Registration Form</a>
+            </li>
+            <li>
+              <a href="/Hero/food.html"><i class="fas fa-star"></i> Famous Food</a>
+            </li>
+            <!-- Search bar -->
+            <li>
+              <form ng-submit="search()">
+                <input type="text" ng-model="searchQuery" placeholder="Search Restaurants">
+                <button type="submit"><i class="bi bi-search"></i></button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!--
+    <div class="nav-scroller bg-body shadow-sm">
+      <nav class="nav" aria-label="Secondary navigation">
+        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+        <a class="nav-link" href="#">
+          Friends
+          <span class="badge text-bg-light rounded-pill align-text-bottom">27</span>
+        </a>
+        <a class="nav-link" href="#">Explore</a>
+        <a class="nav-link" href="#">Suggestions</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+      </nav>
+    </div> -->
+
+    <div class="album mt-5 py-5 bg-warning bg-opacity-10">
+      <div class="container">
+        <h3 class="text-body-secondary my-3">Available Restaurants</h3>
+        <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
+          <div class="col">
+            <a href="mcdonalds_page.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="McDonalds.avif"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">McDonald's</h5>
+                  <p class="card-text">
+                    McDonald's is a global fast-food chain known for its
+                    hamburgers, fries, and various other fast-food items.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4/5 stars</small>
+                    <small class="text-success">24mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a href="dominos.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="Dominos.jpg"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Domino's</h5>
+                  <p class="card-text">
+                    Domino's Pizza is a well-known pizza restaurant chain that
+                    offers a variety of pizzas and other side dishes.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4.5/5 stars</small>
+                    <small class="text-success-emphasis">34mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a href="shivsagar.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="shivsagar.webp"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Shivsagar</h5>
+                  <p class="card-text">
+                    Shivsagar is a popular Indian restaurant known for its
+                    authentic Indian cuisine and traditional ambiance.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4.2/5 stars</small>
+                    <small class="text-danger">55mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a href="burgerking.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="burgerking.avif"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Burger King</h5>
+                  <p class="card-text">
+                    Burger King is a well-known fast-food chain famous for its
+                    flame-grilled burgers and other sandwiches.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4.3/5 stars</small>
+                    <small class="text-success">28mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- Pizza Hut -->
+          <div class="col">
+            <a href="pizzahut.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="pizzahut.jpeg"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Pizza Hut</h5>
+                  <p class="card-text">
+                    Pizza Hut is a popular pizza restaurant chain offering a
+                    wide range of pizzas and other Italian dishes.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4.4/5 stars</small>
+                    <small class="text-success-emphasis">40mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- Subway -->
+          <div class="col">
+            <a href="subway.html" class="card-link">
+              <div class="card shadow-sm">
+                <img
+                  src="subway.jpeg"
+                  class="bd-placeholder-img card-img-top"
+                  width="100%"
+                  height="225"
+                  role="img"
+                  aria-label="Placeholder: Thumbnail"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                  alt="Placeholder"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Subway</h5>
+                  <p class="card-text">
+                    fast-food chain known for its sandwiches and salads made
+                    with freshly baked bread and various toppings.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small class="text-success">4.1/5 stars</small>
+                    <small class="text-success">20mins</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="container py-5 my-5 border-top">
+      <div class="row">
+        <div class="col-md-3">
+          <a
+            href="/"
+            class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none"
+          >
+            <img src="/logo.png.ico" alt="Bingee" width="40" />
+          </a>
+          <p class="text-body-secondary">© 2024 Bingee Inc.</p>
+        </div>
+
+        <div class="col-md-2">
+          <h5 class="mb-3">Explore</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Restaurants</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Categories</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Deals</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Gift Cards</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-2">
+          <h5 class="mb-3">For You</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Sign Up</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Order Now</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Delivery</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Gold Pass</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-2">
+          <h5 class="mb-3">About Us</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a
+                href="/About-us/About-Bingee.html"
+                class="nav-link p-0 text-body-secondary"
+                >About Bingee</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Careers</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Press</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Blog</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h5 class="mb-3">Follow Us</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Facebook</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Twitter</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Instagram</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Define your AngularJS module
+      var app = angular.module('myApp', []);
+  
+      // Define your AngularJS controller
+      app.controller('myCtrl', function($scope) {
+        // Your restaurant data (replace this with your actual data)
+        $scope.restaurants = [
+          { name: 'McDonald\'s' },
+          { name: 'Domino\'s' },
+          { name: 'Pizza Hut' },
+          // Add more restaurant objects as needed
+        ];
+  
+        // Function to search for restaurants
+        $scope.search = function() {
+          // Implement search logic here
+          // For demonstration, let's filter the restaurants array based on searchQuery
+          $scope.filteredRestaurants = $scope.restaurants.filter(function(restaurant) {
+            return restaurant.name.toLowerCase().includes($scope.searchQuery.toLowerCase());
+          });
+        };
+      });
+    </script>
+  </body>
+</html>

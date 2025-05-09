@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="st.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <style>
+        
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-right: 60px;
+        }
+
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-details h3 {
+            margin-top: 0;
+        }
+
+        
+        .search-container {
+          display: flex;
+          justify-content: space-between;
+            background-color: #3B0D11;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .search-container label{
+            color: white;
+        }
+
+        
+        .fries { background-color: #3B0D11; }
+        .burger { background-color: #3B0D11; }
+       
+    </style>
+</head>
+
+<body ng-app="myApp">
+   
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home-final.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about-us.html"><i class="fas fa-info"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="photo-gallery.html"><i class="fas fa-images"></i> Photo Gallery</a></li>
+                    <li><a href="registration-form.html"><i class="fas fa-user-plus"></i> Registration Form</a></li>
+                    <li><a href="heroes-and-modals.html"><i class="fas fa-star"></i> Heroes and Modals</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    
+    <h1>Food Menu</h1>
+
+   
+    <div ng-controller="foodMenuCtrl">
+        <!-- Search container -->
+        <div class="search-container">
+            <!-- Filter by Category -->
+            <label>Filter by Category:</label>
+            <select ng-model="categoryFilter">
+                <option value="">All</option>
+                <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+            </select>
+
+            <!-- Filter by Price Range -->
+            <label>Filter by Price Range:</label>
+            <input type="number" ng-model="minPrice" placeholder="Min Price">
+            <input type="number" ng-model="maxPrice" placeholder="Max Price">
+
+            <!-- Filter by Keyword -->
+            <label>Search by Keyword:</label>
+            <input type="text" ng-model="keywordFilter" placeholder="Enter keyword">
+        </div>
+
+        <ul>
+          
+            <li ng-repeat="foodItem in foodMenu | filter : { category: categoryFilter } | filter : priceRangeFilter | filter : keywordFilter | orderBy : 'name' | limitTo : 6"
+                class="food-item" ng-class="foodItem.category.toLowerCase()">
+                <img ng-src="{{ foodItem.image }}" alt="{{ foodItem.name }}">
+                <div class="food-details">
+                    <h3>{{ foodItem.name | uppercase }}</h3>
+                    <p>Category: {{ foodItem.category | lowercase }}</p>
+                    <p>Price: {{ foodItem.price | number | currency : "₹" }}</p>
+                    <p>Description: {{ foodItem.description }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('myApp', []).controller('foodMenuCtrl', function($scope, $filter) {
+            
+           $scope.foodMenu = [{
+          "name": "Cheeseburger",
+          "category": "Burger",
+          "price": 200,
+          "description": "Juicy beef patty topped with cheese, lettuce, tomato, and onion on a sesame seed bun.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjcp5-PXzhhaK8Hqogq5abieb_Y5837T5jMw&usqp=CAU"
+        },
+        {
+          "name": "Classic Burger",
+          "category": "Burger",
+          "price": 250,
+          "description": "Classic beef burger with lettuce, tomato, onion, pickles, and special sauce.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDJxe8ETbR66QVWqgD0GL3-QCQWIsTlVBl4A&usqp=CAU"
+        },
+        {
+          "name": "BBQ Burger",
+          "category": "Burger",
+          "price": 300,
+          "description": "Grilled beef burger topped with melted cheddar cheese, crispy bacon, BBQ sauce, lettuce, and tomato.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtqAsDc7aVkWrLeZ3pZ5C5u0RQFzzA40P90w&usqp=CAU"
+        },
+        {
+          "name": "French Fries",
+          "category": "Fries",
+          "price": 190,
+          "description": "Classic crispy French fries.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnjVqHhRszCJ4fXzIbCtbci0scMChPpe5gCw&usqp=CAU"
+        },
+        {
+          "name": "Chili Cheese Fries",
+          "category": "Fries",
+          "price": 195,
+          "description": "Crispy fries topped with homemade chili and melted cheddar cheese.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPBdyMjruQowA8g2cCWBqggpXwOkD10n0tMw&usqp=CAU"
+        },
+        {
+          "name": "Garlic Parmesan Fries",
+          "category": "Fries",
+          "price": 205,
+          "description": "Golden fries tossed in garlic butter and parmesan cheese.",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBKgz-LT-zqK7uEhGfcF7gEz4QQHrUPZWHBA&usqp=CAU"
+        }
+      ];
+
+            
+            $scope.categories = [];
+            angular.forEach($scope.foodMenu, function(item) {
+                if ($scope.categories.indexOf(item.category) === -1) {
+                    $scope.categories.push(item.category);
+                }
+            });
+
+            
+            $scope.priceRangeFilter = function(foodItem) {
+                if (($scope.minPrice && foodItem.price < $scope.minPrice) ||
+                    ($scope.maxPrice && foodItem.price > $scope.maxPrice)) {
+                    return false;
+                }
+                return true;
+            };
+        });
+    </script>
+</body>
+
+</html>

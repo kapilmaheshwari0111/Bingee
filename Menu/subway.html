@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="st.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <title> Subway </title> 
+    <link rel="icon" type="image/x-icon" href="logomain.png" />
+    
+    <style>
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3B0D11;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 26px;
+            transition: background-color 0.3s ease;
+            margin: 0 auto;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #59051B;
+        }
+
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-right: 60px;
+        }
+
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-details h3 {
+            margin-top: 0;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #3B0D11;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .search-container label {
+            color: white;
+        }
+        .wrap { background-color: #3B0D11; }
+        .beverage { background-color: #3B0D11; }
+      .geo {
+            padding: 3px 2px 2px 3px;
+            background-color: #3B0D11;
+            width: 1252px;
+            height: 402px;
+            margin-top: 2px;
+            margin-left: 40px;
+            margin-right: 5px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="home-final.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about-us.html"><i class="fas fa-info"></i> About Us</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="review.html"><i class="fas fa-images"></i> Review</a></li>
+                <li><a href="registration-form.html"><i class="fas fa-user-plus"></i> Registration Form</a></li>
+                <li><a href="order1.html"><i class="fas fa-star"></i> Order</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Food Menu</h1>
+
+    <div ng-controller="foodMenuCtrl">
+        
+        <div class="search-container">
+           <label>Filter by Category:</label>
+            <select ng-model="categoryFilter">
+                <option value="">All</option>
+                <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+            </select>
+
+            
+            <label>Filter by Price Range:</label>
+            <input type="number" ng-model="minPrice" placeholder="Min Price">
+            <input type="number" ng-model="maxPrice" placeholder="Max Price">
+
+           
+            <label>Search by Keyword:</label>
+            <input type="text" ng-model="keywordFilter" placeholder="Enter keyword">
+        </div>
+
+        <ul>
+            <li ng-repeat="foodItem in foodMenu | filter : { category: categoryFilter } | filter : priceRangeFilter | filter : keywordFilter | orderBy : 'name' | limitTo : 6"
+                class="food-item" ng-class="foodItem.category.toLowerCase()">
+                <img ng-src="{{ foodItem.image }}" alt="{{ foodItem.name }}">
+                <div class="food-details">
+                    <h3>{{ foodItem.name | uppercase }}</h3>
+                    <p>Category: {{ foodItem.category | lowercase }}</p>
+                    <p>Price: {{ foodItem.price | number | currency : "₹" }}</p>
+                    <p>Description: {{ foodItem.description }}</p>
+                </div>
+                <div>
+                    <button ng-click="updateQuantity(foodItem, 'decrease')">-</button>
+                    <span>{{ foodItem.quantity || 0 }}</span>
+                    <button ng-click="updateQuantity(foodItem, 'increase')">+</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('myApp', []).controller('foodMenuCtrl', function ($scope, $http) {
+            $scope.foodMenu = [
+               
+                {
+                    "name": "Veggie Wrap",
+                    "category": "Wrap",
+                    "price": 150,
+                    "description": "A delicious wrap filled with assorted veggies and sauces.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrs1nLBY1ZBjcmQJkmRYDHd38KhjFK2jpr5g&usqp=CAU",
+                    "quantity": 0
+                },
+                {
+                    "name": "Chicken Wrap",
+                    "category": "Wrap",
+                    "price": 180,
+                    "description": "Tender chicken pieces wrapped in a soft tortilla with fresh veggies and mayo.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXRMK7ZwVw1RF0QVliEPrp_zp5yJ34-52AOA&usqp=CAU",
+                    "quantity": 0
+                },
+                {
+                    "name": "Paneer Tikka Wrap",
+                    "category": "Wrap",
+                    "price": 200,
+                    "description": "A flavorful wrap stuffed with marinated paneer tikka pieces and veggies.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsRRnY4ADTVdTvyIwLloNjk4Znw_hHY_X8Yg&usqp=CAU",
+                    "quantity": 0
+                },
+                {
+                    "name": "Iced Coffee",
+                    "category": "Beverage",
+                    "price": 120,
+                    "description": "Chilled coffee served with ice cubes and milk, perfect for a hot day.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-63Y3jehTshI6nSqa8aIzTD94fBcyQ8fy5w&usqp=CAU",
+                    "quantity": 0
+                }
+            ];
+
+           
+            $scope.categories = [];
+            angular.forEach($scope.foodMenu, function(item) {
+                if ($scope.categories.indexOf(item.category) === -1) {
+                    $scope.categories.push(item.category);
+                }
+            });
+
+         
+            $scope.priceRangeFilter = function(foodItem) {
+                if (($scope.minPrice && foodItem.price < $scope.minPrice) ||
+                    ($scope.maxPrice && foodItem.price > $scope.maxPrice)) {
+                    return false;
+                }
+                return true;
+            };
+
+       
+            $scope.updateQuantity = function(foodItem, action) {
+                if (action === 'increase') {
+                    foodItem.quantity = (foodItem.quantity || 0) + 1;
+                } else if (action === 'decrease' && foodItem.quantity && foodItem.quantity > 0) {
+                    foodItem.quantity--;
+                }
+
+                
+                console.log("Quantity updated on the client side:", foodItem);
+               
+            };
+
+           
+        
+        });
+    </script>
+    <div class = "geo"style="width: 93.5vw;">
+     <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d62229.104039468046!2d77.54320965574738!3d12.887197517019873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sMcDonald&#39;s!5e0!3m2!1sen!2sin!4v1711029144747!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     </div><br>
+    <button class="back-button" onclick="window.history.back()">Back</button>
+</body>
+
+</html>

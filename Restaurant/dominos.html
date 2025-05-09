@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Donimnos </title>
+    <link rel="stylesheet" href="st.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="logomain.png" />
+    
+    <style>
+        body {
+            background-color: #3B0D11;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #59051B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 26px;
+            transition: background-color 0.3s ease;
+            margin: 0 auto; 
+            display: block; 
+        }
+
+        .back-button:hover {
+            background-color: #3B0D11;
+        }
+        
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #59051B;
+            color: white;
+            margin-right: 60px;
+        }
+
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-details h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp">
+    
+    <h1>Food Menu</h1>
+
+    <div ng-controller="foodMenuCtrl">
+        <ul>
+            <li ng-repeat="foodItem in foodMenu" class="food-item" ng-class="foodItem.category.toLowerCase()">
+                <img ng-src="{{ foodItem.image }}" alt="{{ foodItem.name }}">
+                <div class="food-details">
+                    <h3>{{ foodItem.name | uppercase }}</h3>
+                    <p>Category: {{ foodItem.category | lowercase }}</p>
+                    <p>Price: ₹{{ foodItem.price }}</p>
+                    <p>Description: {{ foodItem.description }}</p>
+                    <h4>Nutritional Information:</h4>
+                    <ul>
+                        <li>Calories: {{ foodItem.nutrition.calories || 'Loading...' }}</li>
+                        <li>Protein: {{ foodItem.nutrition.protein || 'Loading...' }}</li>
+                        <li>Fat: {{ foodItem.nutrition.fat || 'Loading...' }}</li>
+                        <li>Carbs: {{ foodItem.nutrition.carbs || 'Loading...' }}</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('myApp', []).controller('foodMenuCtrl', function($scope, $http) {
+            $scope.apiKey = "McPoVsLldWuqVMhktI2ykjBSovkoVEUMF8bi8pp8";
+            
+            $scope.foodMenu = [
+                {
+                    "name": "Margherita Pizza",
+                    "category": "veg",
+                    "price": 200,
+                    "description": "Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil leaves.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYebArUqima1wAZhjjxV0vjAm2KDBweli7Dw&usqp=CAU",
+                    "nutrition": {}
+                },
+                {
+                    "name": "Vegetable Supreme Pizza",
+                    "category": "veg",
+                    "price": 250,
+                    "description": "Loaded with assorted vegetables like capsicum, onion, tomato, and olives.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHWvALK7eW-6fmLYpGAjy0Ohe2B_FHoBWfBg&usqp=CAU",
+                    "nutrition": {}
+                },
+                {
+                    "name": "Paneer Tikka Pizza",
+                    "category": "veg",
+                    "price": 310,
+                    "description": "Topped with marinated paneer, onions, capsicum, and flavored with Indian spices.",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUMfmueZy1n8hjced08HYmq5ANGayckyNg6A&usqp=CAU",
+                    "nutrition": {}
+                }
+            ];
+            
+            $scope.loadNutritionData = function() {
+                $scope.foodMenu.forEach((foodItem) => {
+                    var apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodItem.name}&api_key=${$scope.apiKey}`;
+                    
+                    $http.get(apiUrl).then(function(response) {
+                        if (response.data.foods.length > 0) {
+                            var foodData = response.data.foods[0];
+                            var nutrients = foodData.foodNutrients || [];
+
+                            function getNutrientValue(name) {
+                                var nutrient = nutrients.find(n => n.nutrientName.includes(name));
+                                return nutrient ? nutrient.value + " " + nutrient.unitName : "Not Available";
+                            }
+
+                            foodItem.nutrition = {
+                                calories: getNutrientValue("Energy"),
+                                protein: getNutrientValue("Protein"),
+                                fat: getNutrientValue("Total lipid (fat)"),
+                                carbs: getNutrientValue("Carbohydrate")
+                            };
+                        }
+                    });
+                });
+            };
+
+            $scope.loadNutritionData();
+        });
+    </script>
+</body>
+</html>

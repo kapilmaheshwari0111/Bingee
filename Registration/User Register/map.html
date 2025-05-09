@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Location as Address</title>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        #locationOutput {
+            font-size: 18px;
+        }
+
+        #googleMap {
+            width: 100%;
+            height: 500px; /* Adjust height as needed */
+        }
+
+        #confirmAddress {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #confirmBtns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        #confirmBtn {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        /* Button Styles */
+#confirmBtn,
+#yesBtn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px; /* Added border radius */
+    transition: background-color 0.3s; /* Added transition */
+}
+
+#confirmBtn:hover,
+#yesBtn:hover {
+    background-color: #45a049; /* Darker shade of green on hover */
+}
+
+#noBtn {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px; /* Added border radius */
+    transition: background-color 0.3s; /* Added transition */
+}
+
+#noBtn:hover {
+    background-color: #d32f2f; /* Darker shade of red on hover */
+}
+
+    </style>
+</head>
+<body>
+
+    <h1 style="font-size: 50px; line-height: 56px; margin-bottom: 25px; font-weight: 700; text-align: center; border: 10px solid maroon; padding: 0px;">User Location as Address</h1>
+
+    <div id="locationOutput">
+        <label for="latitude">Enter Latitude:</label>
+        <input type="text" id="latitude" placeholder="Latitude">
+
+        <label for="longitude">Enter Longitude:</label>
+        <input type="text" id="longitude" placeholder="Longitude">
+
+        <button onclick="showUserLocation()">Show Location on Map</button>
+    </div>
+
+    <div id="googleMap"></div>
+
+    <div id="confirmAddress">
+        <p>Use this location as address?</p>
+        <div id="confirmBtns">
+            <button id="yesBtn" onclick="useAddress()">Yes, Use Address</button>
+            <button id="noBtn" onclick="enterAddress()">NO, Enter your address</button>
+        </div>
+    </div>
+
+    <script>
+    var latitude, longitude;
+
+    function showPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+
+        const locationOutput = document.getElementById("locationOutput");
+        locationOutput.innerHTML = `Latitude: ${latitude}<br>Longitude: ${longitude}`;
+
+        const map = new google.maps.Map(document.getElementById("googleMap"), {
+            center: { lat: latitude, lng: longitude },
+            zoom: 15,
+        });
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: "User's Location",
+        });
+
+        // Show confirmation box
+        document.getElementById("confirmAddress").style.display = "block";
+    }
+
+    function showError(error) {
+        const locationOutput = document.getElementById("locationOutput");
+        locationOutput.innerHTML = `Error: ${error.message}`;
+    }
+
+    function showUserLocation() {
+        const latitudeInput = document.getElementById("latitude").value;
+        const longitudeInput = document.getElementById("longitude").value;
+
+        if (latitudeInput && longitudeInput) {
+            latitude = parseFloat(latitudeInput);
+            longitude = parseFloat(longitudeInput);
+
+            const locationOutput = document.getElementById("locationOutput");
+            locationOutput.innerHTML = `Latitude: ${latitude}<br>Longitude: ${longitude}`;
+
+            const map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: { lat: latitude, lng: longitude },
+                zoom: 15,
+            });
+
+            const marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: "User's Location",
+            });
+
+            // Show confirmation box
+            document.getElementById("confirmAddress").style.display = "block";
+        } else {
+            const locationOutput = document.getElementById("locationOutput");
+            locationOutput.innerHTML = "Please enter both latitude and longitude.";
+        }
+    }
+
+    function useAddress() {
+        // Prompt user to save address as home or work
+        var saveAddress = confirm("Do you want to save this address?");
+        if (saveAddress) {
+            var addressType = prompt("Enter address type (home/work):");
+            if (addressType && (addressType.toLowerCase() === "home" || addressType.toLowerCase() === "work")) {
+                // Address type is valid, further processing can be done here
+                alert(`Address saved as ${addressType}: Latitude ${latitude}, Longitude ${longitude}`);
+            } else {
+                alert("Invalid address type. Address not saved.");
+            }
+        } else {
+            // Address not saved
+            alert("Address not saved.");
+        }
+    }
+    function enterAddress() {
+    // Store form data in localStorage
+    localStorage.setItem('formData', JSON.stringify({
+        firstName: $scope.formData.firstName,
+        lastName: $scope.formData.lastName,
+        email: $scope.formData.email,
+        password: $scope.formData.password,
+        address: $scope.formData.address,
+        phone: $scope.formData.phone
+    }));
+    // Redirect to enter address page or perform any other action
+    window.location.href = "userRF.html";
+}
+
+
+    function enterAddress() {
+        // Redirect to enter address page or perform any other action
+        window.location.href = "userRF.html";
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        const locationOutput = document.getElementById("locationOutput");
+        locationOutput.innerHTML = "Geolocation is not supported by this browser.";
+    }
+</script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCpVuNVuRI2L_gP4gIr1GUpJ_VKxJfvVw&callback=myMap"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to handle saving address
+            $('#yesBtn').click(function() {
+                var formData = window.location.search.substring(1); // Extract form data from URL
+                localStorage.setItem('formData', formData); // Store form data in localStorage
+                // Redirect back to registration page
+                window.location.href = 'userRF.html';
+            });
+        });
+    </script>
+
+</body>
+</html>

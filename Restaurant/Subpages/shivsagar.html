@@ -1,0 +1,182 @@
+Sure, here's the completed HTML code with 3 roti and 3 dal dishes:
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="st.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <style>
+        
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-right: 60px;
+        }
+
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-details h3 {
+            margin-top: 0;
+        }
+
+        
+        .search-container {
+          display: flex;
+          justify-content: space-between;
+            background-color: #3B0D11;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .search-container label{
+            color: white;
+        }
+
+        
+        .roti { background-color: #3B0D11; }
+        .dal { background-color: #3B0D11; }
+       
+    </style>
+</head>
+
+<body ng-app="myApp">
+   
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="home-final.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about-us.html"><i class="fas fa-info"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="photo-gallery.html"><i class="fas fa-images"></i> Photo Gallery</a></li>
+                    <li><a href="registration-form.html"><i class="fas fa-user-plus"></i> Registration Form</a></li>
+                    <li><a href="heroes-and-modals.html"><i class="fas fa-star"></i> Heroes and Modals</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    
+    
+
+   
+    <div ng-controller="foodMenuCtrl">
+        <!-- Search container -->
+        <div class="search-container">
+            <!-- Filter by Category -->
+            <label>Filter by Category:</label>
+            <select ng-model="categoryFilter">
+                <option value="">All</option>
+                <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+            </select>
+
+            <!-- Filter by Price Range -->
+            <label>Filter by Price Range:</label>
+            <input type="number" ng-model="minPrice" placeholder="Min Price">
+            <input type="number" ng-model="maxPrice" placeholder="Max Price">
+
+            <!-- Filter by Keyword -->
+            <label>Search by Keyword:</label>
+            <input type="text" ng-model="keywordFilter" placeholder="Enter keyword">
+        </div>
+
+        <ul>
+          
+            <li ng-repeat="foodItem in foodMenu | filter : { category: categoryFilter } | filter : priceRangeFilter | filter : keywordFilter | orderBy : 'name' | limitTo : 6"
+                class="food-item" ng-class="foodItem.category.toLowerCase()">
+                <img ng-src="{{ foodItem.image }}" alt="{{ foodItem.name }}">
+                <div class="food-details">
+                    <h3>{{ foodItem.name | uppercase }}</h3>
+                    <p>Category: {{ foodItem.category | lowercase }}</p>
+                    <p>Price: {{ foodItem.price | number | currency : "₹" }}</p>
+                    <p>Description: {{ foodItem.description }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('myApp', []).controller('foodMenuCtrl', function($scope, $filter) {
+            
+           $scope.foodMenu = [
+                {
+                    "name": "Roti",
+                    "category": "Roti",
+                    "price": 30,
+                    "description": "Traditional Indian flatbread made from whole wheat flour.",
+                    "image": "https://example.com/roti.jpg"
+                },
+                {
+                    "name": "Tandoori Roti",
+                    "category": "Roti",
+                    "price": 40,
+                    "description": "Whole wheat bread cooked in a clay oven.",
+                    "image": "https://example.com/tandoori-roti.jpg"
+                },
+                {
+                    "name": "Naan",
+                    "category": "Roti",
+                    "price": 35,
+                    "description": "Leavened Indian bread baked in a tandoor.",
+                    "image": "https://example.com/naan.jpg"
+                },
+                {
+                    "name": "Dal Tadka",
+                    "category": "Dal",
+                    "price": 250,
+                    "description": "Yellow lentils cooked with spices and tempered with ghee.",
+                    "image": "https://example.com/dal-tadka.jpg"
+                },
+                {
+                    "name": "Dal Makhani",
+                    "category": "Dal",
+                    "price": 300,
+                    "description": "Creamy black lentils cooked with butter and cream.",
+                    "image": "https://example.com/dal-makhani.jpg"
+                },
+                {
+                    "name": "Chana Dal",
+                    "category": "Dal",
+                    "price": 190,
+                    "description": "Split chickpeas cooked with onions, tomatoes, and spices.",
+                    "image": "https://example.com/chana-dal.jpg"
+                }
+            ];
+
+            
+            $scope.categories = [];
+            angular.forEach($scope.foodMenu, function(item) {
+                if ($scope.categories.indexOf(item.category) === -1) {
+                    $scope.categories.push(item.category);
+                }
+            });
+
+            
+            $scope.priceRangeFilter = function(foodItem) {
+                if (($scope.minPrice && foodItem.price < $scope.minPrice) ||
+                    ($scope.maxPrice && foodItem.price > $scope.maxPrice)) {
+                    return false;
+                }
+                return true;
+            };
+        });
+    </script>
+</body>
+
+</html>

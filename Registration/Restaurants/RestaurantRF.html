@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Registration</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <main>
+        <section class="learn">
+           <h1>JOIN US<br>as a Restaurant Partner</h1>
+           <p>Showcase your culinary delights to a wider audience! <br> Register your restaurant with us and deliver happiness on every plate.</p>  
+        </section>
+
+        <section>
+            <div class="cta">
+                <p><b>Register Your Restaurant<b> and reach more hungry customers!</p>
+            </div>
+
+            <div class="sign-up">
+                <form action="post" class="signup-form" data-netlify="true" netlify-honeypot="bot-field" netlify-recaptcha="true">
+                    <!-- Honeypot field to prevent spam -->
+                    <div style="display: none;">
+                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" name="restaurant-name" placeholder="Restaurant Name" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Restaurant Name cannot be empty</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" name="owner-name" placeholder="Owner Name" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Owner Name cannot be empty</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Looks like this is not an email</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="password" name="password" placeholder="Password" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Password cannot be empty</p>
+                    </div>
+
+                    <!-- Additional Fields for Restaurant Registration -->
+                    <div class="form-btn">
+                        <input type="tel" name="phone" placeholder="Phone Number" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Phone Number cannot be empty</p>
+                    </div>
+
+                    <div class="form-btn">
+                        <input type="text" name="cuisine-type" placeholder="Cuisine Type" required>
+                        <img class="icon" src="./Images/icon-error.svg" alt="Error">
+                        <p class="msg">Please specify the cuisine type</p>
+                    </div>
+
+                    <!-- Recaptcha field for additional spam protection (optional) -->
+                    <div data-netlify-recaptcha="true"></div>
+
+                    <input id="submit-btn" type="submit" value="Register Now" id="btn">
+
+                    <p class="terms">By clicking the button, you are agreeing to our <span><a href="#">Terms and Services</a></span></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+</body>
+</html>

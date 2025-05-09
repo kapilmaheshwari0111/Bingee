@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #2e2e2e;
+  overflow-x: hidden;
+}
+
+header {
+  background-color: #373a31;
+  padding: 1px;
+  color: #e5e5e5;
+  text-align: center;
+  margin-left: -80%;
+}
+
+nav {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+}
+nav ul {
+  list-style-type: none;
+}
+nav ul {
+  text-align: center;
+  list-style: none;
+  margin-left: 300px;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 30px 72px;
+}
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out;
+}
+nav ul li a:hover {
+  color: aquamarine;
+}
+.heading h1 {
+  color: #e5e5e5;
+}
+.story {
+  display: flex;
+  align-items: stretch;
+  margin-top: 4vh;
+  z-index: 2;
+  background-color: rgba(231, 167, 167, 0.064);
+}
+
+.heading {
+  flex: 1;
+  margin-top: 5vh;
+  margin-left: 5vw;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.verticle-line {
+  width: 2px;
+  background-color: #e5e5e5; /* Adjust color as needed */
+  height: 8vh;
+  margin-top: 6vh;
+  margin-left: -3vw;
+}
+
+.content {
+    color: #e5e5e5;
+  flex: 6.5;
+  padding: 20px;
+  margin-left: 2vw;
+}
+.storybg {
+  background-image: url(bg-intro-desktop.png);
+  position: absolute;
+  background-repeat: repeat;
+  height: 150vh;
+}
+
+
+img {
+  position: absolute;
+  height: 350px;
+  width: 300px;
+  border-radius: 5%;
+}
+.cphoto {
+  margin-top: 320px;
+  margin-left: 320px;
+}
+.kajphoto {
+    position: absolute;
+    margin-left: 800px;
+}
+.nikiphoto {
+  margin-left: 1300px;
+}
+.rphoto {
+  position: relative;
+  top: 470px;
+  left: 560px;
+}
+.kapphoto {
+  position: relative;
+  top: 470px;
+  left: 1046px;
+}
+
+.chrisfp {
+  position: relative;
+}
+
+.cfp img {
+  position: absolute;
+  width: 35%;
+  left: -50vw;
+  height: auto;
+  z-index: 2;
+  transition: left 0.3s ease-out;
+}
+.christd {
+    background-color: rgba(0, 0, 0, 0.383);
+    border-radius: 4%;
+    position: absolute;
+    font-family: "Nabla", system-ui;
+    left: 100vw;
+    top: 5vh;
+    font-size: 2vw;
+    transition: left 0.3s ease-out;
+    z-index: 2;
+  }
+
+#header {
+  font-size: 4vw;
+}
+#description{
+    margin-top: 19%;
+}
+
+.focusphotos:hover .cfp img {
+    left: 12vw;
+}
+
+.focusphotos:hover .christd {
+    left: 50vw;
+}
+
+.kajalfp {
+    position: relative;
+  }
+  
+.kjfp img {
+    position: absolute;
+    border-radius: 5%;
+    width: 35%;
+    left: -50vw;
+    height: auto;
+    z-index: 2;
+    transition: left 0.3s ease-out;
+}
+.kajald {
+      background-color: rgba(0, 0, 0, 0.383);
+      border-radius: 4%;
+      position: absolute;
+      font-family: "Nabla", system-ui;
+      left: 105vw;
+      top: -2vh;
+      font-size: 2vw;
+      transition: left 0.3s ease-out;
+      z-index: 2;
+}
+  
+#kjheader {
+    font-size: 4vw;
+}
+#kjdescription{
+      margin-top: 19%;
+}
+.kajalfocus:hover .kjfp img {
+    left: 10vw;
+}
+
+.kajalfocus:hover .kajald {
+    left: 47vw;
+}
+.nikifp {
+  position: relative;
+}
+
+.nifp img {
+  position: absolute;
+  border-radius: 5%;
+  width: 35%;
+  left: -50vw;
+  height: auto;
+  z-index: 2;
+  transition: left 0.3s ease-out;
+}
+.nikid {
+    background-color: rgba(0, 0, 0, 0.383);
+    border-radius: 4%;
+    position: absolute;
+    font-family: "Nabla", system-ui;
+    left: 107vw;
+    top: -3vh;
+    font-size: 2vw;
+    transition: left 0.3s ease-out;
+    z-index: 2;
+}
+
+#nikiheader {
+  font-size: 4vw;
+}
+#nikidescription{
+    margin-top: 25%;
+}
+
+.nikifp:hover .nifp img {
+  left: 10vw;
+}
+
+.nikifp:hover .nikid {
+  left: 47vw;
+}
+
+.ruchakfocus {
+  position: relative;
+}
+
+.rfp img {
+  position: absolute;
+  border-radius: 5%;
+  width: 35%;
+  left: -50vw;
+  height: auto;
+  z-index: 2;
+  transition: left 0.3s ease-out;
+}
+.rd {
+    background-color: rgba(0, 0, 0, 0.383);
+    border-radius: 4%;
+    position: absolute;
+    font-family: "Nabla", system-ui;
+    left: 107vw;
+    top: -3vh;
+    font-size: 2vw;
+    transition: left 0.3s ease-out;
+    z-index: 2;
+}
+
+#ruchakheader {
+  font-size: 4vw;
+}
+#ruchakdescription{
+    margin-top: 25%;
+}
+
+.ruchakfocus:hover .rfp img {
+  left: 10vw;
+}
+
+.ruchakfocus:hover .rd {
+  left: 47vw;
+}
+
+.kapilfocus {
+  position: relative;
+}
+
+.kapilfp img {
+  position: absolute;
+  border-radius: 5%;
+  width: 35%;
+  left: -50vw;
+  height: auto;
+  z-index: 2;
+  transition: left 0.3s ease-out;
+}
+.kapild {
+    background-color: rgba(0, 0, 0, 0.383);
+    border-radius: 4%;
+    position: absolute;
+    font-family: "Nabla", system-ui;
+    left: 107vw;
+    top: -3vh;
+    font-size: 2vw;
+    transition: left 0.3s ease-out;
+    z-index: 2;
+}
+
+#kapilheader {
+  font-size: 4vw;
+}
+#kapildescription{
+    margin-top: 20%;
+}
+
+.kapilfocus:hover .kapilfp img {
+  left: 10vw;
+}
+
+.kapilfocus:hover .kapild {
+  left: 47vw;
+}
